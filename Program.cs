@@ -169,7 +169,7 @@ namespace application
 				string? append = Console.ReadLine();
 
 				bool append_bool = false;
-
+			
 				if (append != null)
 				{
 					if (append.ToLower() == "true")
@@ -231,8 +231,8 @@ namespace application
 			{
 				try
 				{
-					bool usernameCorrect = false;       //username check for the current user
-					bool pwdCorrect = false;            //pwd check for the current user
+					bool usernameCorrect = false;		//username check for the current user
+					bool pwdCorrect = false;			//pwd check for the current user
 
 					foreach (string line in File.ReadLines(USERNAME + ".pwd"))
 					{
@@ -286,45 +286,8 @@ namespace application
 	{
 		//settings class
 
-
-		//old default class
 		public void IMPLEMENT_CODE_HERE()
 		{
-
-
-			Console.WriteLine(new NotImplementedException());
-		}
-
-		//main function to access --> check if user is allowed to do this
-		public void access(string USERNAME)
-		{
-			Console.WriteLine(new NotImplementedException());
-		}
-
-		//change the pwd
-		public void changePassword(string USERNAME)
-		{
-			Console.WriteLine(new NotImplementedException());
-		}
-
-		//allow or disallow the user to access settings
-		public void changePerms(string USERNAME)
-		{
-			Console.WriteLine(new NotImplementedException());
-		}
-
-		//change the username
-		public void changeUsername(string USERNAME)
-		{
-			Console.WriteLine(new NotImplementedException());
-		}
-		
-
-		//change the motd => message of the day
-		public void changeMOTD(string USERNAME)
-		{
-			//implement this later!
-
 			Console.WriteLine(new NotImplementedException());
 		}
 	}
