@@ -130,6 +130,7 @@ namespace application
 						break;
 
 					case "settings":
+						Console.WriteLine("\n\nEntering settings mode!\n");
 						Console.WriteLine(new NotImplementedException());
 						break;
 
@@ -213,7 +214,7 @@ namespace application
 					StreamWriter writer = new StreamWriter("default.pwd");
 					writer.WriteLine("USERNAME=default");
 					writer.WriteLine("PWD=");
-					writer.WriteLine("PERMS=*");
+					writer.WriteLine("SETTINGS=true");
 					writer.WriteLine("MOTD=Das ist ein default Account!");
 					writer.Close();
 				}
@@ -283,6 +284,8 @@ namespace application
 
 	public class Settings
 	{
+		//settings class
+
 		public void IMPLEMENT_CODE_HERE()
 		{
 			Console.WriteLine(new NotImplementedException());

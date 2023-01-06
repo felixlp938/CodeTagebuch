@@ -1,4 +1,4 @@
 USERNAME=default
 PWD=
-PERMS=*
+SETTINGS=true
 MOTD=Das ist ein default Account!
