@@ -1,6 +1,5 @@
 ﻿//(c) 2023, FelixLP; Git: https://github.com/felixlp938
 
-using application.afterPwd;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
@@ -297,7 +296,16 @@ namespace application
 		//main function to access --> check if user is allowed to do this
 		public void access(string USERNAME)
 		{
-			Console.WriteLine(new NotImplementedException());
+			try
+			{
+				
+				//implement code here;
+
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+			}
 		}
 
 		//change the pwd
