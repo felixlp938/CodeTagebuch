@@ -213,7 +213,7 @@ namespace application
 					StreamWriter writer = new StreamWriter("default.pwd");
 					writer.WriteLine("USERNAME=default");
 					writer.WriteLine("PWD=");
-					writer.WriteLine("PERMS=*");
+					writer.WriteLine("SETTINGS=true");
 					writer.WriteLine("MOTD=Das ist ein default Account!");
 					writer.Close();
 				}
