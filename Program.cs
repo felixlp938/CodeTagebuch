@@ -298,7 +298,54 @@ namespace application
 		{
 			try
 			{
+				string? allowed = null;
 
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("SETTINGS="))
+					{
+						allowed = line.Substring(9);
+					}
+				}
+
+				if (allowed is null)
+				{
+					Console.WriteLine("Der Wert SETTINGS in der USERDATEI ist NULL (also nicht festgelegt)");
+					afterPwd.loggedIn.init();
+				}
+
+				if (allowed.ToLower().Equals("true"))
+				{
+					Console.Write("Settings: [username (den Username ändern); pwd (das Passwort ändern); settings (Einstellungen erlauben oder verbieten); motd (Message-Of-The-Day ändern)] ");
+					string? command_input = Console.ReadLine();
+
+					if (command_input.ToLower() is null)
+					{
+						Console.WriteLine("Der Command kann nicht NULL sein, das Programm wird nun beendet!");
+					}
+
+					switch (command_input.ToLower())
+					{
+						case "username":
+							changeUsername(USERNAME);
+							break;
+
+						case "pwd":
+							changePassword(USERNAME);
+							break;
+
+						case "settings":
+							changePerms(USERNAME);
+							break;
+
+						case "motd":
+							changeMOTD(USERNAME);
+							break;
+
+						default:
+							break;
+					}
+				}
 			}
 			catch (Exception e)
 			{
