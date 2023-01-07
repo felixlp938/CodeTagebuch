@@ -391,7 +391,7 @@ namespace application
 				{
 					StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
 					writer.WriteLine($"USERNAME={config_USERNAME}");
-					writer.WriteLine($"PWD=");
+					writer.WriteLine($"PWD={pwd_1}");
 					writer.WriteLine($"SETTINGS={config_SETTINGS}");
 					writer.WriteLine($"MOTD={changeMOTD}");
 
@@ -420,7 +420,66 @@ namespace application
 		//change the username
 		public void changeUsername(string USERNAME)
 		{
-			Console.WriteLine(new NotImplementedException());
+			try
+			{
+				string? config_SETTINGS = null;
+				string? config_PWD = null;
+				string? config_MOTD = null;         //never used
+
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("SETTINGS="))
+					{
+						config_SETTINGS = line.Substring(9);
+					}
+
+					if (line.StartsWith("PWD="))
+					{
+						config_PWD = line.Substring(4);
+					}
+
+					if (line.StartsWith("MOTD="))
+					{
+						config_MOTD = line.Substring(5);
+					}
+				}
+
+				File.Delete(USERNAME + ".pwd");
+
+				Console.WriteLine("Gebe deinen neuen Username ein:");
+				string? username_1 = Console.ReadLine();
+				Thread.Sleep(100);
+				Console.WriteLine("Gebe den Username erneut ein:");
+				string? username_2 = Console.ReadLine();
+
+				if (username_1 is null || username_2 is null)
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames dürfen nicht NULL sein!");
+					afterPwd.loggedIn.init();
+				}
+
+				if (username_1 == username_2)
+				{
+					StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
+					writer.WriteLine($"USERNAME={username_1}");
+					writer.WriteLine($"PWD={config_PWD}");
+					writer.WriteLine($"SETTINGS={config_SETTINGS}");
+					writer.WriteLine($"MOTD={changeMOTD}");
+
+					writer.Close();
+				}
+				else
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames stimmen nicht überein!");
+					afterPwd.loggedIn.init();
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
 		}
 
 
