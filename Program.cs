@@ -296,7 +296,16 @@ namespace application
 		//main function to access --> check if user is allowed to do this (allow to change settings)
 		public void access(string USERNAME)
 		{
-			
+			try
+			{
+
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
 		}
 
 		//change the pwd
@@ -359,10 +368,9 @@ namespace application
 			catch (Exception e)
 			{
 				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
 			}
-
-
-			Console.WriteLine(new NotImplementedException());
 		}
 
 		//allow or disallow the user to access settings
