@@ -129,6 +129,7 @@ namespace application
 						break;
 
 					case "settings":
+						Console.WriteLine("\n\nEntering settings mode!\n");
 						Console.WriteLine(new NotImplementedException());
 						break;
 
