@@ -334,6 +334,7 @@ namespace application
 							break;
 
 						default:
+							access(USERNAME);
 							break;
 					}
 				}
@@ -396,6 +397,9 @@ namespace application
 					writer.WriteLine($"MOTD={changeMOTD}");
 
 					writer.Close();
+
+					afterPwd.loggedIn.init();
+
 				}
 				else
 				{
@@ -461,6 +465,9 @@ namespace application
 					writer.WriteLine($"MOTD={changeMOTD}");
 
 					writer.Close();
+
+					afterPwd.loggedIn.init();
+
 				}
 				else
 				{
@@ -526,6 +533,9 @@ namespace application
 					writer.WriteLine($"MOTD={changeMOTD}");
 
 					writer.Close();
+
+					afterPwd.loggedIn.init();
+
 				}
 				else
 				{
@@ -582,6 +592,9 @@ namespace application
 				writer.WriteLine($"MOTD={motd}");
 
 				writer.Close();
+
+				afterPwd.loggedIn.init();
+
 			
 			}
 			catch (Exception e)
