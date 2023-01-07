@@ -284,15 +284,6 @@ namespace application
 	{
 		//settings class
 
-
-		//old default class
-		public void IMPLEMENT_CODE_HERE()
-		{
-
-
-			Console.WriteLine(new NotImplementedException());
-		}
-
 		//main function to access --> check if user is allowed to do this (allow to change settings)
 		public void access(string USERNAME)
 		{
