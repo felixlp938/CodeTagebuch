@@ -414,7 +414,66 @@ namespace application
 		//allow or disallow the user to access settings
 		public void changePerms(string USERNAME)
 		{
-			Console.WriteLine(new NotImplementedException());
+			try
+			{
+				string? config_USERNAME = null;
+				string? config_PWD = null;
+				string? config_MOTD = null;         //never used
+
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("USERNAME="))
+					{
+						config_USERNAME = line.Substring(9);
+					}
+
+					if (line.StartsWith("PWD="))
+					{
+						config_PWD = line.Substring(4);
+					}
+
+					if (line.StartsWith("MOTD="))
+					{
+						config_MOTD = line.Substring(5);
+					}
+				}
+
+				File.Delete(USERNAME + ".pwd");
+
+				Console.WriteLine("Sollen die Einstellungen erlaubt werden? Falls ja, gebe true ein[!] anderen Falls false[!]:");
+				string? allow_1 = Console.ReadLine();
+				Thread.Sleep(100);
+				Console.WriteLine("Gebe den Wert erneut ein:");
+				string? allow_2 = Console.ReadLine();
+
+				if (allow_1 is null || allow_2 is null)
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames dürfen nicht NULL sein!");
+					afterPwd.loggedIn.init();
+				}
+
+				if (allow_1 == allow_2)
+				{
+					StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
+					writer.WriteLine($"USERNAME={config_USERNAME}");
+					writer.WriteLine($"PWD={config_PWD}");
+					writer.WriteLine($"SETTINGS={allow_1}");
+					writer.WriteLine($"MOTD={changeMOTD}");
+
+					writer.Close();
+				}
+				else
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Werte stimmen nicht überein!");
+					afterPwd.loggedIn.init();
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
 		}
 
 		//change the username
