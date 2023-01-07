@@ -27,7 +27,7 @@ namespace application
 			string? username = Console.ReadLine();
 			Thread.Sleep(100);
 			Console.Write("Password: ");
-			string password = runnable.GetPassword();
+			string password = GetPassword();
 
 			Console.WriteLine(" ");
 			Console.WriteLine(" ");
@@ -53,7 +53,7 @@ namespace application
 			}
 		}
 
-		public string GetPassword()
+		public static string GetPassword()
 		{
 			var pass = string.Empty;
 			ConsoleKey key;
@@ -293,24 +293,75 @@ namespace application
 			Console.WriteLine(new NotImplementedException());
 		}
 
-		//main function to access --> check if user is allowed to do this
+		//main function to access --> check if user is allowed to do this (allow to change settings)
 		public void access(string USERNAME)
 		{
-			try
-			{
-				
-				//implement code here;
-
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine($"Error: {e.Message}");
-			}
+			
 		}
 
 		//change the pwd
 		public void changePassword(string USERNAME)
 		{
+			try
+			{
+				string? config_USERNAME = null;
+				string? config_SETTINGS = null;
+				string? config_MOTD = null;         //never used
+
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("USERNAME="))
+					{
+						config_USERNAME = line.Substring(9);
+					}
+
+					if (line.StartsWith("SETTINGS="))
+					{
+						config_SETTINGS = line.Substring(9);
+					}
+
+					if (line.StartsWith("MOTD="))
+					{
+						config_MOTD = line.Substring(5);
+					}
+				}
+
+				File.Delete(USERNAME + ".pwd");
+
+				Console.WriteLine("Gebe dein neues Passowort ein:");
+				string? pwd_1 = Runnable.GetPassword();
+				Thread.Sleep(100);
+				Console.WriteLine("Gebe das Passwort erneut ein:");
+				string? pwd_2 = Runnable.GetPassword();
+
+				if (pwd_1 is null || pwd_2 is null)
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Passwörter dürfen nicht NULL sein!");
+					afterPwd.loggedIn.init();
+				}
+
+				if (pwd_1 == pwd_2)
+				{
+					StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
+					writer.WriteLine($"USERNAME={config_USERNAME}");
+					writer.WriteLine($"PWD=");
+					writer.WriteLine($"SETTINGS={config_SETTINGS}");
+					writer.WriteLine($"MOTD={changeMOTD}");
+
+					writer.Close();
+				}
+				else
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Passwörter stimmen nicht überein!");
+					afterPwd.loggedIn.init();
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+			}
+
+
 			Console.WriteLine(new NotImplementedException());
 		}
 
