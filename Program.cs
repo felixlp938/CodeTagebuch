@@ -1,6 +1,5 @@
 ﻿//(c) 2023, FelixLP; Git: https://github.com/felixlp938
 
-using application.afterPwd;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
@@ -28,7 +27,7 @@ namespace application
 			string? username = Console.ReadLine();
 			Thread.Sleep(100);
 			Console.Write("Password: ");
-			string password = runnable.GetPassword();
+			string password = GetPassword();
 
 			Console.WriteLine(" ");
 			Console.WriteLine(" ");
@@ -54,7 +53,7 @@ namespace application
 			}
 		}
 
-		public string GetPassword()
+		public static string GetPassword()
 		{
 			var pass = string.Empty;
 			ConsoleKey key;
@@ -286,9 +285,325 @@ namespace application
 	{
 		//settings class
 
-		public void IMPLEMENT_CODE_HERE()
+		//main function to access --> check if user is allowed to do this (allow to change settings)
+		public void access(string USERNAME)
 		{
-			Console.WriteLine(new NotImplementedException());
+			try
+			{
+				string? allowed = null;
+
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("SETTINGS="))
+					{
+						allowed = line.Substring(9);
+					}
+				}
+
+				if (allowed is null)
+				{
+					Console.WriteLine("Der Wert SETTINGS in der USERDATEI ist NULL (also nicht festgelegt)");
+					afterPwd.loggedIn.init();
+				}
+
+				if (allowed.ToLower().Equals("true"))
+				{
+					Console.Write("Settings: [username (den Username ändern); pwd (das Passwort ändern); settings (Einstellungen erlauben oder verbieten); motd (Message-Of-The-Day ändern)] ");
+					string? command_input = Console.ReadLine();
+
+					if (command_input.ToLower() is null)
+					{
+						Console.WriteLine("Der Command kann nicht NULL sein, das Programm wird nun beendet!");
+					}
+
+					switch (command_input.ToLower())
+					{
+						case "username":
+							changeUsername(USERNAME);
+							break;
+
+						case "pwd":
+							changePassword(USERNAME);
+							break;
+
+						case "settings":
+							changePerms(USERNAME);
+							break;
+
+						case "motd":
+							changeMOTD(USERNAME);
+							break;
+
+						default:
+							access(USERNAME);
+							break;
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
+		}
+
+		//change the pwd
+		public void changePassword(string USERNAME)
+		{
+			try
+			{
+				string? config_USERNAME = null;
+				string? config_SETTINGS = null;
+				string? config_MOTD = null;         //never used
+
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("USERNAME="))
+					{
+						config_USERNAME = line.Substring(9);
+					}
+
+					if (line.StartsWith("SETTINGS="))
+					{
+						config_SETTINGS = line.Substring(9);
+					}
+
+					if (line.StartsWith("MOTD="))
+					{
+						config_MOTD = line.Substring(5);
+					}
+				}
+
+				File.Delete(USERNAME + ".pwd");
+
+				Console.WriteLine("Gebe dein neues Passowort ein:");
+				string? pwd_1 = Runnable.GetPassword();
+				Thread.Sleep(100);
+				Console.WriteLine("Gebe das Passwort erneut ein:");
+				string? pwd_2 = Runnable.GetPassword();
+
+				if (pwd_1 is null || pwd_2 is null)
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Passwörter dürfen nicht NULL sein!");
+					afterPwd.loggedIn.init();
+				}
+
+				if (pwd_1 == pwd_2)
+				{
+					StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
+					writer.WriteLine($"USERNAME={config_USERNAME}");
+					writer.WriteLine($"PWD={pwd_1}");
+					writer.WriteLine($"SETTINGS={config_SETTINGS}");
+					writer.WriteLine($"MOTD={changeMOTD}");
+
+					writer.Close();
+
+					afterPwd.loggedIn.init();
+
+				}
+				else
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Passwörter stimmen nicht überein!");
+					afterPwd.loggedIn.init();
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
+		}
+
+		//allow or disallow the user to access settings
+		public void changePerms(string USERNAME)
+		{
+			try
+			{
+				string? config_USERNAME = null;
+				string? config_PWD = null;
+				string? config_MOTD = null;         //never used
+
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("USERNAME="))
+					{
+						config_USERNAME = line.Substring(9);
+					}
+
+					if (line.StartsWith("PWD="))
+					{
+						config_PWD = line.Substring(4);
+					}
+
+					if (line.StartsWith("MOTD="))
+					{
+						config_MOTD = line.Substring(5);
+					}
+				}
+
+				File.Delete(USERNAME + ".pwd");
+
+				Console.WriteLine("Sollen die Einstellungen erlaubt werden? Falls ja, gebe true ein[!] anderen Falls false[!]:");
+				string? allow_1 = Console.ReadLine();
+				Thread.Sleep(100);
+				Console.WriteLine("Gebe den Wert erneut ein:");
+				string? allow_2 = Console.ReadLine();
+
+				if (allow_1 is null || allow_2 is null)
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames dürfen nicht NULL sein!");
+					afterPwd.loggedIn.init();
+				}
+
+				if (allow_1 == allow_2)
+				{
+					StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
+					writer.WriteLine($"USERNAME={config_USERNAME}");
+					writer.WriteLine($"PWD={config_PWD}");
+					writer.WriteLine($"SETTINGS={allow_1}");
+					writer.WriteLine($"MOTD={changeMOTD}");
+
+					writer.Close();
+
+					afterPwd.loggedIn.init();
+
+				}
+				else
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Werte stimmen nicht überein!");
+					afterPwd.loggedIn.init();
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
+		}
+
+		//change the username
+		public void changeUsername(string USERNAME)
+		{
+			try
+			{
+				string? config_SETTINGS = null;
+				string? config_PWD = null;
+				string? config_MOTD = null;         //never used
+
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("SETTINGS="))
+					{
+						config_SETTINGS = line.Substring(9);
+					}
+
+					if (line.StartsWith("PWD="))
+					{
+						config_PWD = line.Substring(4);
+					}
+
+					if (line.StartsWith("MOTD="))
+					{
+						config_MOTD = line.Substring(5);
+					}
+				}
+
+				File.Delete(USERNAME + ".pwd");
+
+				Console.WriteLine("Gebe deinen neuen Username ein:");
+				string? username_1 = Console.ReadLine();
+				Thread.Sleep(100);
+				Console.WriteLine("Gebe den Username erneut ein:");
+				string? username_2 = Console.ReadLine();
+
+				if (username_1 is null || username_2 is null)
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames dürfen nicht NULL sein!");
+					afterPwd.loggedIn.init();
+				}
+
+				if (username_1 == username_2)
+				{
+					StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
+					writer.WriteLine($"USERNAME={username_1}");
+					writer.WriteLine($"PWD={config_PWD}");
+					writer.WriteLine($"SETTINGS={config_SETTINGS}");
+					writer.WriteLine($"MOTD={changeMOTD}");
+
+					writer.Close();
+
+					afterPwd.loggedIn.init();
+
+				}
+				else
+				{
+					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames stimmen nicht überein!");
+					afterPwd.loggedIn.init();
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
+		}
+
+
+		//change the motd => message of the day
+		public void changeMOTD(string USERNAME)
+		{
+			try
+			{
+				string? config_SETTINGS = null;
+				string? config_PWD = null;
+				string? config_USERNAME = null;    
+
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("SETTINGS="))
+					{
+						config_SETTINGS = line.Substring(9);
+					}
+
+					if (line.StartsWith("PWD="))
+					{
+						config_PWD = line.Substring(4);
+					}
+
+					if (line.StartsWith("USERNAME="))
+					{
+						config_USERNAME = line.Substring(9);
+					}
+				}
+
+				File.Delete(USERNAME + ".pwd");
+
+				Console.WriteLine("Gebe deine neue MOTD ein:");
+				string? motd = Console.ReadLine();
+				Thread.Sleep(100);
+				
+				StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
+				writer.WriteLine($"USERNAME={config_USERNAME}");
+				writer.WriteLine($"PWD={config_PWD}");
+				writer.WriteLine($"SETTINGS={config_SETTINGS}");
+				writer.WriteLine($"MOTD={motd}");
+
+				writer.Close();
+
+				afterPwd.loggedIn.init();
+
+			
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
 		}
 	}
 }
