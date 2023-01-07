@@ -545,9 +545,51 @@ namespace application
 		//change the motd => message of the day
 		public void changeMOTD(string USERNAME)
 		{
-			//implement this later!
+			try
+			{
+				string? config_SETTINGS = null;
+				string? config_PWD = null;
+				string? config_USERNAME = null;    
 
-			Console.WriteLine(new NotImplementedException());
+				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+				{
+					if (line.StartsWith("SETTINGS="))
+					{
+						config_SETTINGS = line.Substring(9);
+					}
+
+					if (line.StartsWith("PWD="))
+					{
+						config_PWD = line.Substring(4);
+					}
+
+					if (line.StartsWith("USERNAME="))
+					{
+						config_USERNAME = line.Substring(9);
+					}
+				}
+
+				File.Delete(USERNAME + ".pwd");
+
+				Console.WriteLine("Gebe deine neue MOTD ein:");
+				string? motd = Console.ReadLine();
+				Thread.Sleep(100);
+				
+				StreamWriter writer = new StreamWriter(USERNAME + ".pwd");
+				writer.WriteLine($"USERNAME={config_USERNAME}");
+				writer.WriteLine($"PWD={config_PWD}");
+				writer.WriteLine($"SETTINGS={config_SETTINGS}");
+				writer.WriteLine($"MOTD={motd}");
+
+				writer.Close();
+			
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Error: {e.Message}");
+				Console.ReadKey();
+				afterPwd.loggedIn.init();
+			}
 		}
 	}
 }
