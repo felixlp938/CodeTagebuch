@@ -615,8 +615,13 @@ namespace application
 
 
 		//change the motd => message of the day
-		public void changeMOTD(string USERNAME)
+		public void changeMOTD(string? USERNAME)
 		{
+			if (USERNAME is null)
+			{
+				return;
+			}
+
 			try
 			{
 				string? config_SETTINGS = null;
