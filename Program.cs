@@ -395,8 +395,13 @@ namespace application
 		}
 
 		//change the pwd
-		public void changePassword(string USERNAME)
+		public void changePassword(string? USERNAME)
 		{
+			if (USERNAME is null)
+			{
+				return;
+			}
+
 			try
 			{
 				string? config_USERNAME = null;
