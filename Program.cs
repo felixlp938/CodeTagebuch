@@ -279,6 +279,34 @@ namespace application
 				return false;
 			}
 		}
+
+		public string sendMOTD(string USERNAME)
+		{
+			try
+			{
+				if (File.Exists(USERNAME + ".pwd"))
+				{
+					foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
+					{
+						if (line.StartsWith("MOTD="))
+						{
+							return line.Substring(5);
+						}
+					}
+
+					return null;
+
+				}
+				else
+				{
+					return null;
+				}
+			}
+			catch (Exception e)
+			{
+				return e.Message;
+			}
+		}
 	}
 
 	public class Settings
