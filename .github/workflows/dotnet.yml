@@ -41,7 +41,7 @@ jobs:
         zip -r latest_build build README.md
     - name: Get Date
       id: date
-      run: echo "DATE=$(date +'%d%m%Y | %H%M')" >> $GITHUB_ENV
+      run: echo "DATE=$(date +'%d%m%Y_%H%M')" >> $GITHUB_ENV
       
     - name: Create Release
       id: create_release
