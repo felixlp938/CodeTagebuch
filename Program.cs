@@ -385,6 +385,11 @@ namespace application
 							break;
 					}
 				}
+				else
+				{
+					Console.WriteLine("Du darfst die Settings leider nicht öffnen! (Um diese Abfrage zu umgehen, gehe in deine Profil-File und ändere den Wert SETTINGS zu true)");
+					afterPwd.loggedIn.init();
+				}
 			}
 			catch (Exception e)
 			{
