@@ -28,23 +28,28 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: dotnet publish CodeTagebuch.csproj -c Release -o build
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.2
+      
+    - name: Build project # This would actually build your project, using zip for an example artifact
+      run: |
+        zip latest_build build README.md
+      
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: build
-        path: build/**
-        if-no-files-found: error
-  release:
-    name: "Release Package"
-    runs-on: windows-latest
-    steps:
-      - name: "Build and test"
-        run: |
-          echo "done!"
-          
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            build\**
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ./latest_build.zip
+        asset_name: latest_build.zip
+        asset_content_type: application/zip
