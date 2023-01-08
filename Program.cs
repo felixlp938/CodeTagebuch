@@ -541,8 +541,13 @@ namespace application
 		}
 
 		//change the username
-		public void changeUsername(string USERNAME)
+		public void changeUsername(string? USERNAME)
 		{
+			if (USERNAME is null)
+			{
+				return;
+			}
+
 			try
 			{
 				string? config_SETTINGS = null;
