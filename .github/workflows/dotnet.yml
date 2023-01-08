@@ -34,3 +34,17 @@ jobs:
         name: build
         path: build/**
         if-no-files-found: error
+  release:
+    name: "Release Package"
+    runs-on: windows-latest
+    steps:
+      - name: "Build and test"
+        run: |
+          echo "done!"
+          
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            build\**
