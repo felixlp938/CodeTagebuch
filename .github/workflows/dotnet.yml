@@ -38,7 +38,7 @@ jobs:
       
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
-        zip latest_build build README.md
+        zip -r latest_build build README.md
       
     - name: Create Release
       id: create_release
