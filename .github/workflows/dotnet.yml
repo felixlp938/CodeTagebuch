@@ -29,6 +29,13 @@ jobs:
     - name: Publish
       run: dotnet publish CodeTagebuch.csproj -c Release -o build
       
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: build/**
+        if-no-files-found: error
+      
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
         zip latest_build build README.md
