@@ -288,8 +288,13 @@ namespace application
 			}
 		}
 
-		public static string sendMOTD(string USERNAME)
+		public static string sendMOTD(string? USERNAME)
 		{
+			if (USERNAME is null)
+			{
+				return null;
+			}
+
 			try
 			{
 				if (File.Exists(USERNAME + ".pwd"))
