@@ -468,8 +468,13 @@ namespace application
 		}
 
 		//allow or disallow the user to access settings
-		public void changePerms(string USERNAME)
+		public void changePerms(string? USERNAME)
 		{
+			if (USERNAME is null)
+			{
+				return;
+			}
+
 			try
 			{
 				string? config_USERNAME = null;
