@@ -225,8 +225,15 @@ namespace application
 			}
 		}
 
-		public bool chkPwd(string USERNAME, string PASSWORD)
+		public bool chkPwd(string? USERNAME, string? PASSWORD)
 		{
+
+			if (USERNAME is null || PASSWORD is null)
+			{
+				return false;
+			}
+
+
 			if (File.Exists(USERNAME + ".pwd"))
 			{
 				try
