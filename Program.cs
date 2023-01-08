@@ -88,6 +88,7 @@ namespace application
 				loggedIn loggedin = new();
 
 				Console.WriteLine($"Willkommen bei deinem Code-Tagebuch, {USERNAME}");
+				Console.WriteLine($"{null}");
 				Console.WriteLine("Eine Liste von allen Commands: settings; read; write; delete; modify; exit; logout");
 
 				loggedin.perfomCommand(Console.ReadLine());
@@ -280,7 +281,7 @@ namespace application
 			}
 		}
 
-		public string sendMOTD(string USERNAME)
+		public static string sendMOTD(string USERNAME)
 		{
 			try
 			{
