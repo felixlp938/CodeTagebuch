@@ -327,8 +327,13 @@ namespace application
 		//settings class
 
 		//main function to acces --> check if user is allowed to do this (allow to change settings)
-		public void acces(string USERNAME)
+		public void acces(string? USERNAME)
 		{
+			if (USERNAME is null)
+			{
+				return;
+			}
+
 			try
 			{
 				string? allowed = null;
