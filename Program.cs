@@ -285,8 +285,8 @@ namespace application
 	{
 		//settings class
 
-		//main function to access --> check if user is allowed to do this (allow to change settings)
-		public void access(string USERNAME)
+		//main function to acces --> check if user is allowed to do this (allow to change settings)
+		public void acces(string USERNAME)
 		{
 			try
 			{
@@ -335,7 +335,7 @@ namespace application
 							break;
 
 						default:
-							access(USERNAME);
+							acces(USERNAME);
 							break;
 					}
 				}
