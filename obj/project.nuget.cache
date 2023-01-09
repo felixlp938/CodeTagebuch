@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XX3uxdJkdwM++WYUeHOr3nzdRM8qNY2z2ugYvVVgLSkNk34NB4Op6PdmOyZHteKD0BxURfGDKnBAItVqSslGDQ==",
+  "dgSpecHash": "EZsUPp44hkcPjTwL9tCfSnjg5yqkKVzisn2Py9IEpu+HvQpGnoUtGA8vMjg/oQ6LGvq3QM+1kiJn/ozR0EzzwQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\FelixLP\\source\\repos\\CodeTagebuch\\CodeTagebuch.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\FelixLP\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.28\\microsoft.windows.sdk.net.ref.10.0.22621.28.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
