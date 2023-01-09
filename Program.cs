@@ -8,7 +8,7 @@ namespace application
 	public class Runnable
 	{
 		[AllowNull]
-		public string BUILD = "08012023";
+		public string BUILD = "09012023";
 
 		public static void Main()
 		{
@@ -292,7 +292,7 @@ namespace application
 		{
 			if (USERNAME is null)
 			{
-				return null;
+				return "null";
 			}
 
 			try
@@ -307,12 +307,12 @@ namespace application
 						}
 					}
 
-					return null;
+					return "null";
 
 				}
 				else
 				{
-					return null;
+					return "null";
 				}
 			}
 			catch (Exception e)
@@ -350,6 +350,7 @@ namespace application
 				{
 					Console.WriteLine("Der Wert SETTINGS in der USERDATEI ist NULL (also nicht festgelegt)");
 					afterPwd.loggedIn.init();
+					return;
 				}
 
 				if (allowed.ToLower().Equals("true"))
@@ -357,9 +358,11 @@ namespace application
 					Console.Write("Settings: [username (den Username ändern); pwd (das Passwort ändern); settings (Einstellungen erlauben oder verbieten); motd (Message-Of-The-Day ändern)] ");
 					string? command_input = Console.ReadLine();
 
-					if (command_input.ToLower() is null)
+					if (command_input is null)
 					{
 						Console.WriteLine("Der Command kann nicht NULL sein, das Programm wird nun beendet!");
+						afterPwd.loggedIn.init();
+						return;
 					}
 
 					switch (command_input.ToLower())
