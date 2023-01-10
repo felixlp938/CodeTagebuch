@@ -131,7 +131,8 @@ namespace application
 
 					case "settings":
 						Console.WriteLine("\n\nEntering settings mode!\n");
-						Console.WriteLine(new NotImplementedException());
+						Settings settings = new Settings();
+						settings.acces(USERNAME);
 						break;
 
 					default:
