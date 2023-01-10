@@ -8,7 +8,7 @@ namespace application
 	public class Runnable
 	{
 		[AllowNull]
-		public string BUILD = "09012023";
+		public string BUILD = "10012023";
 
 		public static void Main()
 		{
