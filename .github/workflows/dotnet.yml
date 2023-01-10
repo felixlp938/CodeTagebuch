@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish CodeTagebuch.csproj -c Release -o build
+      run: dotnet publish CodeTagebuch.csproj -c Release -o build -r win10-x64
       
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
