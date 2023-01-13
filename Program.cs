@@ -33,7 +33,6 @@ namespace application
 			{
 				Console.WriteLine("Du kannst dich nicht als NULL anmelden! Wie soll das Funktionieren?");
 				Main();
-				return;
 			}
 
 
@@ -73,8 +72,4 @@ namespace application
 			return pass;
 		}
 	}
-
-	
-
-	
 }
