@@ -19,10 +19,7 @@ namespace afterPwd
 
 		public void perfomCommand(string? COMMAND)
 		{
-			if (COMMAND is null)
-			{
-				return;
-			}
+			if (COMMAND is null) return;
 
 			switch (COMMAND.ToLower())
 			{
@@ -152,12 +149,8 @@ public class secManager
 	public bool chkPwd(string? USERNAME, string? PASSWORD)
 	{
 
-		if (USERNAME is null || PASSWORD is null)
-		{
-			return false;
-		}
-
-
+		if (USERNAME is null || PASSWORD is null) return false;
+		
 		if (File.Exists(USERNAME + ".pwd"))
 		{
 			try
@@ -214,10 +207,7 @@ public class secManager
 
 	public static string sendMOTD(string? USERNAME)
 	{
-		if (USERNAME is null)
-		{
-			return "null";
-		}
+		if (USERNAME is null) return "null";
 
 		try
 		{
@@ -225,10 +215,7 @@ public class secManager
 			{
 				foreach (string line in File.ReadAllLines(USERNAME + ".pwd"))
 				{
-					if (line.StartsWith("MOTD="))
-					{
-						return line.Substring(5);
-					}
+					if (line.StartsWith("MOTD=")) return line.Substring(5);
 				}
 
 				return "null";
