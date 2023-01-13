@@ -11,10 +11,7 @@ namespace CodeTagebuch
 		//main function to acces --> check if user is allowed to do this (allow to change settings)
 		public void acces(string? USERNAME)
 		{
-			if (USERNAME is null)
-			{
-				return;
-			}
+			if (USERNAME is null) return;
 
 			try
 			{
@@ -87,10 +84,7 @@ namespace CodeTagebuch
 		//change the pwd
 		public void changePassword(string? USERNAME)
 		{
-			if (USERNAME is null)
-			{
-				return;
-			}
+			if (USERNAME is null) return;
 
 			try
 			{
@@ -141,7 +135,6 @@ namespace CodeTagebuch
 					writer.Close();
 
 					application.afterPwd.loggedIn.init();
-
 				}
 				else
 				{
@@ -160,10 +153,7 @@ namespace CodeTagebuch
 		//allow or disallow the user to access settings
 		public void changePerms(string? USERNAME)
 		{
-			if (USERNAME is null)
-			{
-				return;
-			}
+			if (USERNAME is null) return;
 
 			try
 			{
@@ -347,12 +337,9 @@ namespace CodeTagebuch
 				writer.WriteLine($"PWD={config_PWD}");
 				writer.WriteLine($"SETTINGS={config_SETTINGS}");
 				writer.WriteLine($"MOTD={motd}");
-
 				writer.Close();
 
 				application.afterPwd.loggedIn.init();
-
-			
 			}
 			catch (Exception e)
 			{
