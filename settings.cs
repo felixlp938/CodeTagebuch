@@ -26,7 +26,7 @@ namespace CodeTagebuch
 				if (allowed is null)
 				{
 					Console.WriteLine("Der Wert SETTINGS in der USERDATEI ist NULL (also nicht festgelegt)");
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 					return;
 				}
 
@@ -38,7 +38,7 @@ namespace CodeTagebuch
 					if (command_input is null)
 					{
 						Console.WriteLine("Der Command kann nicht NULL sein, das Programm wird nun beendet!");
-						application.afterPwd.loggedIn.init();
+						afterPwd.loggedIn.init();
 						return;
 					}
 
@@ -68,14 +68,14 @@ namespace CodeTagebuch
 				else
 				{
 					Console.WriteLine("Du darfst die Settings leider nicht öffnen! (Um diese Abfrage zu umgehen, gehe in deine Profil-File und ändere den Wert SETTINGS zu true)");
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 				}
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine($"Error: {e.Message}");
 				Console.ReadKey();
-				application.afterPwd.loggedIn.init();
+				afterPwd.loggedIn.init();
 			}
 		}
 
@@ -119,7 +119,7 @@ namespace CodeTagebuch
 				if (pwd_1 is null || pwd_2 is null)
 				{
 					Console.WriteLine("Das hat leider nicht geklappt! Die Passwörter dürfen nicht NULL sein!");
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 				}
 
 				if (pwd_1 == pwd_2)
@@ -132,19 +132,19 @@ namespace CodeTagebuch
 
 					writer.Close();
 
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 				}
 				else
 				{
 					Console.WriteLine("Das hat leider nicht geklappt! Die Passwörter stimmen nicht überein!");
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 				}
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine($"Error: {e.Message}");
 				Console.ReadKey();
-				application.afterPwd.loggedIn.init();
+				afterPwd.loggedIn.init();
 			}
 		}
 
@@ -188,7 +188,7 @@ namespace CodeTagebuch
 				if (allow_1 is null || allow_2 is null)
 				{
 					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames dürfen nicht NULL sein!");
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 				}
 
 				if (allow_1 == allow_2)
@@ -201,20 +201,20 @@ namespace CodeTagebuch
 
 					writer.Close();
 
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 
 				}
 				else
 				{
 					Console.WriteLine("Das hat leider nicht geklappt! Die Werte stimmen nicht überein!");
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 				}
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine($"Error: {e.Message}");
 				Console.ReadKey();
-				application.afterPwd.loggedIn.init();
+				afterPwd.loggedIn.init();
 			}
 		}
 
@@ -261,7 +261,7 @@ namespace CodeTagebuch
 				if (username_1 is null || username_2 is null)
 				{
 					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames dürfen nicht NULL sein!");
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 				}
 
 				if (username_1 == username_2)
@@ -274,20 +274,20 @@ namespace CodeTagebuch
 
 					writer.Close();
 
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 
 				}
 				else
 				{
 					Console.WriteLine("Das hat leider nicht geklappt! Die Usernames stimmen nicht überein!");
-					application.afterPwd.loggedIn.init();
+					afterPwd.loggedIn.init();
 				}
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine($"Error: {e.Message}");
 				Console.ReadKey();
-				application.afterPwd.loggedIn.init();
+				afterPwd.loggedIn.init();
 			}
 		}
 
@@ -337,13 +337,13 @@ namespace CodeTagebuch
 				writer.WriteLine($"MOTD={motd}");
 				writer.Close();
 
-				application.afterPwd.loggedIn.init();
+				afterPwd.loggedIn.init();
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine($"Error: {e.Message}");
 				Console.ReadKey();
-				application.afterPwd.loggedIn.init();
+				afterPwd.loggedIn.init();
 			}
 		}
 	}
