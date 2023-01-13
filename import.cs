@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//(c) 2023, FelixLP; Git: https://github.com/felixlp938
 
-namespace CodeTagebuch
-{
-	internal class import
-	{
-	}
-}
+global using System;
+global using System.IO;
+global using System.Threading;
+global using System.Diagnostics.CodeAnalysis;
+global using System.Text;

@@ -1,11 +1,5 @@
 ﻿//(c) 2023, FelixLP; Git: https://github.com/felixlp938
 
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
-using System;
-using System.Threading;
-using System.IO;
-
 namespace application
 {
 	public class Runnable

@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
+﻿//(c) 2023, FelixLP; Git: https://github.com/felixlp938
 
 namespace CodeTagebuch
 {
