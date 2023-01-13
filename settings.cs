@@ -221,10 +221,7 @@ namespace CodeTagebuch
 		//change the username
 		public void changeUsername(string? USERNAME)
 		{
-			if (USERNAME is null)
-			{
-				return;
-			}
+			if (USERNAME is null) return;
 
 			try
 			{
@@ -295,10 +292,7 @@ namespace CodeTagebuch
 		//change the motd => message of the day
 		public void changeMOTD(string? USERNAME)
 		{
-			if (USERNAME is null)
-			{
-				return;
-			}
+			if (USERNAME is null) return;
 
 			try
 			{
