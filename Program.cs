@@ -4,6 +4,8 @@ namespace application
 {
 	public class Runnable
 	{
+
+		//build version format = DDMMYYYY
 		[AllowNull]
 		public string BUILD = "10012023";
 
@@ -29,13 +31,15 @@ namespace application
 			Console.WriteLine(" ");
 			Console.WriteLine(" ");
 
+
+			//check if username is NULL => true: return to MAIN();
 			if (username is null)
 			{
 				Console.WriteLine("Du kannst dich nicht als NULL anmelden! Wie soll das Funktionieren?");
 				Main();
 			}
 
-
+			//check if user exists and password is correct
 			if (secManager.chkPwd(username, password))
 			{
 				afterPwd.loggedIn.USERNAME = username;
@@ -49,6 +53,7 @@ namespace application
 			}
 		}
 
+		//not called in Program.cs
 		public static string GetPassword()
 		{
 			var pass = string.Empty;
