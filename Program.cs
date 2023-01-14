@@ -7,7 +7,7 @@ namespace application
 
 		//build version format = DDMMYYYY
 		[AllowNull]
-		public string BUILD = "10012023";
+		public string BUILD = "14012023";
 
 		public static void Main()
 		{
