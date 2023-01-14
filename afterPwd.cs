@@ -6,6 +6,7 @@ namespace afterPwd
 	{
 		public static string? USERNAME;
 
+		//init class
 		public static void init()
 		{
 			loggedIn loggedin = new();
@@ -17,6 +18,7 @@ namespace afterPwd
 			loggedin.perfomCommand(Console.ReadLine());
 		}
 
+		//like command promt interface (get command)
 		public void perfomCommand(string? COMMAND)
 		{
 			if (COMMAND is null) return;
@@ -62,6 +64,9 @@ namespace afterPwd
 			}
 		}
 	}
+
+
+	//different modes: create, write
 
 	public class FileMgmt
 	{
@@ -123,6 +128,8 @@ namespace afterPwd
 		}
 	}
 }
+
+	
 
 public class secManager
 {
