@@ -13,7 +13,7 @@ namespace application
 		{
 			Console.OutputEncoding = Encoding.UTF8;
 			Runnable runnable = new();
-			secManager secManager = new();
+			secMgmt.secManager secManager = new();
 
 			secManager.init();
 
